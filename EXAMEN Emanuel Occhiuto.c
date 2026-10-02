@@ -3,7 +3,7 @@
 #include <time.h>
 #include <stdlib.h>
 
-
+//soy el ema
 
 struct Tanque{
 char Sector[40];
