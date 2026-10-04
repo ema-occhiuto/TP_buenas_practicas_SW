@@ -15,6 +15,7 @@ int cantidadTanques=0;
 
 void IngresoDeInformacion(int x);
 void TanquesIngresados(int tanque);
+void TanquesMenorNivel();
 	
 //FUNCION MAIN-----------
 int main() {
@@ -50,7 +51,8 @@ do{
 		
 		break;
 	case 3:
-		
+		printf("---------Tanques con menor nivel:------------\n\n\n\n");
+		TanquesMenorNivel();
 		
 		
 		break;
@@ -121,57 +123,71 @@ void IngresoDeInformacion(int x)
 
 
 //FUNCION DE MENOR NIVEL DE tanques
-void TanquesMenorNivel(){
+void TanquesMenorNivel()
+{
+	int i;
+	int menor1,menor2;
+	//Necesitamos almenos 2 tanques
+	if(cantidadTanques<2){
+		printf("Debe haber almenos 2 tanques cargados\n\n\n");
+		return;
+	}
+	//Comparamos los primeros dos tanques
+	
+	if(tanques[0].Nivel<tanques[2].Nivel){
+		menor1=0;
+		menor2=1;
+	}
+	else{
+		menor1=1;
+		menor2=0;
+	}
+	
+	//Recorremos los tanques restantes 
+	for(i=2;i<cantidadTanques;i++)
+	{
+		if(tanques[i].Nivel<tanques[menor1].Nivel)
+		{
+			menor2=menor1;
+			menor1=i;
+		}
+		else
+		{
+			if(tanques[i].Nivel<tanques[menor2].Nivel)
+			{
+				menor2=i;
+			}
+		}
+	}
+	
+	//Mostramos el tanque con menor nivel
+	printf("-----Primer tanque con menor nivel:\n");
+	printf("Sector: %s\n",tanques[menor1].Sector);
+	printf("Nombre del tanque: %s\n",tanques[menor1].NombreTanque);
+	printf("Nivel de agua:%d%%\n",tanques[menor1].Nivel);
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	//mostramos el segundo
+	printf("\n--- SEGUNDO TANQUE CON MENOR NIVEL ---\n");
+	printf("Sector: %s\n", tanques[menor2].Sector);
+	printf("Nombre del tanque: %s\n", tanques[menor2].NombreTanque);
+	printf("Nivel: %d%%\n", tanques[menor2].Nivel);
 	
 }
-void Sector(char sector[],int x)
-{
-int i,valor;
-char *pSector;
-int tamaño;
-free(pSector);
-*pSector=sector;
-tamaño=strlen(pSector);
-pSector=realloc(pSector,tamaño*sizeof(char));
-for(i=0;i<x;i++)
-{
-valor=strcmp(tanque1[i].Sector,tanque1[i+1].Sector);
-if(valor==0)
-{
-	strcpy(pSector,tanque1[i+1].);
-}
-
-}
- 
-	
-	
-
 	
 	
 	
 	
 	
-
 	
 	
-
 	
 	
-
+	
+	
+	
+	
+	
+	
+	
 
