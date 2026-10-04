@@ -14,7 +14,6 @@ int Nivel;
 int cantidadTanques=0;
 
 void IngresoDeInformacion(int x);
-void TanquesIngresados(int tanque);
 void TanquesMenorNivel();
 void BusquedadTanques();
 	
@@ -23,11 +22,7 @@ int main() {
 	
 	
 //declaracion de variables 
-int x,i,opcion;
-int tanque;
-char sector[20];
-char nombre[20];
-
+int x,opcion;
 
 
 
@@ -48,8 +43,13 @@ do{
 		IngresoDeInformacion(x);
 		break;
 	case 2:
+		if(cantidadTanques==0)
+		{
+			printf("Tienes que ingresar tanques\n\n\n");
+			break;
+		}
 		
-		
+		BusquedadTanques();
 		break;
 	case 3:
 		printf("---------Tanques con menor nivel:------------\n\n\n\n");
@@ -58,6 +58,7 @@ do{
 		
 		break;
 	case 4:
+		free(tanques);
 		printf("Saliendo.....");
 		break;
 			
@@ -73,15 +74,16 @@ return (0);
 
 void IngresoDeInformacion(int x)
 {
+	struct Tanque *ptanque;
 	int nivel,i;
 	char sector[20],nombre[20];
 	int opcion;
 	tanques=(struct Tanque*)realloc(tanques,(cantidadTanques+x)*sizeof(struct Tanque));
 	for(i=cantidadTanques;i<(cantidadTanques+x);i++)
 	{
-		
+		ptanque=&tanques[i];
 		do{
-			printf("Datos del tanque %d:\n",i+1);
+			printf("Datos del tanque %d:\n\n",i+1);
 			printf("1_Ingresar el Sector\n");
 			printf("2_Ingresar el nombre del Tanque\n");
 			printf("3_Ingresar el nivel del Tanque\n");
@@ -92,26 +94,26 @@ void IngresoDeInformacion(int x)
 			switch(opcion)
 			{
 			case 1:
-				printf("Ingrese el Sector del tanque:");
+				printf("Ingrese el Sector del tanque:\n");
 				scanf("%s",sector);
-				strcpy(tanques[i].Sector,sector);
+				strcpy(ptanque->Sector,sector);
 				break;
 			case 2:
 				printf("Ingrese el nombre del tanque:\n");
 				scanf("%s",nombre);
-				strcpy(tanques[i].NombreTanque,nombre);
+				strcpy(ptanque->NombreTanque,nombre);
 				break;
 			case 3:
 				do{
 				printf("Ingrese el nivel del tanque:\n");
 				scanf("%d",&nivel);
-				if(nivel<0||nivel>0){
+				if(nivel<0||nivel>100){
 					printf("Nivel incorrecto.Intente nuevamente\n\n");
 				}
 				}
 				while(nivel<0||nivel>100);
 				
-				tanques[i].Nivel=nivel;
+				ptanque->Nivel=nivel;
 				break;
 				
 			}	
@@ -135,7 +137,7 @@ void TanquesMenorNivel()
 	}
 	//Comparamos los primeros dos tanques
 	
-	if(tanques[0].Nivel<tanques[2].Nivel){
+	if(tanques[0].Nivel<tanques[1].Nivel){
 		menor1=0;
 		menor2=1;
 	}
@@ -188,7 +190,7 @@ void BusquedadTanques()
 	printf("1_Por sector\n");
 	printf("2_Por nombre\n");
 	printf("3_Por nivel de agua\n");
-	printf("Opcion\n\n:");
+	printf("Opcion:\n\n");
 	scanf("%d",&opcionBusqueda);
 	
 	switch(opcionBusqueda)
