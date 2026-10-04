@@ -73,7 +73,7 @@ void IngresoDeInformacion(int x)
 	int nivel,i;
 	char sector[20],nombre[20];
 	int opcion;
-	tanques=(struct Tanque*)realloc((cantidadTanques+x)*sizeof(struct Tanque));
+	tanques=(struct Tanque*)realloc(tanques,(cantidadTanques+x)*sizeof(struct Tanque));
 	for(i=cantidadTanques;i<(cantidadTanques+x);i++)
 	{
 		
@@ -91,24 +91,53 @@ void IngresoDeInformacion(int x)
 			case 1:
 				printf("Ingrese el Sector del tanque:");
 				scanf("%s",sector);
-				strcpy(tanques[i]->Sector,sector);
+				strcpy(tanques[i].Sector,sector);
 				break;
 			case 2:
 				printf("Ingrese el nombre del tanque:\n");
 				scanf("%s",nombre);
-				strcpy(tanques[i]->NombreTanque,nombre);
+				strcpy(tanques[i].NombreTanque,nombre);
 				break;
 			case 3:
+				do{
 				printf("Ingrese el nivel del tanque:\n");
 				scanf("%d",&nivel);
-				tanques[i]->Nivel=nivel;
+				if(nivel<0||nivel>0){
+					printf("Nivel incorrecto.Intente nuevamente");
+				}
+				}
+				while(nivel<0||nivel>100);
+				
+				tanques[i].Nivel=nivel;
 				break;
-			}
-			
+				
+			}	
 		}	
 		while(opcion!=4);
 	}
 	cantidadTanques=cantidadTanques+x;
+	
+}
+
+
+//FUNCION DE MENOR NIVEL DE tanques
+void TanquesMenorNivel(){
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
 void Sector(char sector[],int x)
