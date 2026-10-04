@@ -16,6 +16,7 @@ int cantidadTanques=0;
 void IngresoDeInformacion(int x);
 void TanquesIngresados(int tanque);
 void TanquesMenorNivel();
+void BusquedadTanques();
 	
 //FUNCION MAIN-----------
 int main() {
@@ -105,7 +106,7 @@ void IngresoDeInformacion(int x)
 				printf("Ingrese el nivel del tanque:\n");
 				scanf("%d",&nivel);
 				if(nivel<0||nivel>0){
-					printf("Nivel incorrecto.Intente nuevamente");
+					printf("Nivel incorrecto.Intente nuevamente\n\n");
 				}
 				}
 				while(nivel<0||nivel>100);
@@ -175,10 +176,67 @@ void TanquesMenorNivel()
 	
 }
 	
+//Funcion para la busquedad de tanques 
+
+void BusquedadTanques()
+{
+	int opcionBusqueda;
+	char sector[40];
+	int i,nivel;
+	char nombre[40];
+	printf("\n----Buscar tanques-----\n");
+	printf("1_Por sector\n");
+	printf("2_Por nombre\n");
+	printf("3_Por nivel de agua\n");
+	printf("Opcion\n\n:");
+	scanf("%d",&opcionBusqueda);
 	
-	
-	
-	
+	switch(opcionBusqueda)
+	{
+	case 1:
+		//buscar por sector
+		printf("Ingrese el sector a buscar:");
+		scanf("%s",sector);
+		for(i=0;i<cantidadTanques;i++)
+		{
+			if(strcmp(tanques[i].Sector,sector)==0)
+			{
+				printf("Nombre:%s\n",tanques[i].NombreTanque);
+				printf("Sector: %s\n",tanques[i].Sector);
+				printf("Nivel:%d%%\n",tanques[i].Nivel);
+			}
+		}
+		break;
+	case 2:
+		//Buscar por nombre
+		printf("Ingrese el nombre del tanque a buscar:");
+		scanf("%s",nombre);
+		for(i=0;i<cantidadTanques;i++)
+		{
+			if(strcmp(tanques[i].NombreTanque,nombre)==0)
+			{
+				printf("Nombre: %s\n", tanques[i].NombreTanque);
+				printf("Sector: %s\n", tanques[i].Sector);
+				printf("Nivel: %d%%\n", tanques[i].Nivel);
+			}
+		}
+		break;
+	case 3:
+		//buscar por nivel
+		printf("Ingrese el nivel a buscar\n");
+		scanf("%d",&nivel);
+		for(i=0;i<cantidadTanques;i++)
+		{
+			if(tanques[i].Nivel==nivel)
+			{
+			printf("Nombre: %s\n", tanques[i].NombreTanque);
+			printf("Sector: %s\n", tanques[i].Sector);
+			printf("Nivel: %d%%\n", tanques[i].Nivel);
+			}
+		}
+		break;
+	}
+}
 	
 	
 	
